@@ -1,0 +1,19 @@
+@media (min-width: 767px) { 
+    #navigation {
+        position: fixed;
+        background-color: darkslategray;
+        border-right: 1px solid rgba(0,0,0,0.25);
+        width: 160px;
+        height: 100%;
+        z-index: 2;
+    }
+    .nav-link {
+        color: whitesmoke;
+    }
+}
+
+.col-fixed-160 {
+    position: fixed;
+    width: 160px;
+    height: 100%;
+}
