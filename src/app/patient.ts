@@ -7,4 +7,5 @@ export class Patient {
     address: string;
     phone: string;
     accessed: string;
+    diagnoses: string;
 }

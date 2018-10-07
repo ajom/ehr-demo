@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../patient';
+import { PATIENTS } from '../mock-patients';
 
 @Component({
   selector: 'app-patients',
@@ -7,16 +8,12 @@ import { Patient } from '../patient';
   styleUrls: ['./patients.component.css']
 })
 export class PatientsComponent implements OnInit {
-  patient: Patient = {
-    id: 12345678,
-    firstName: 'John',
-    lastName: 'Smith',
-    dob: 'July 25, 1985',
-    sex: 'M',
-    address: '123 Street St Boston, MA',
-    phone: '1231231234',
-    accessed: 'Today'
-  };
+  patients = PATIENTS;
+
+  selectedPatient: Patient;
+  onSelect(patient: Patient): void {
+    this.selectedPatient = patient;
+  }
 
   constructor() { }
 
