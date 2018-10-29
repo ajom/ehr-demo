@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../patient';
-import { PATIENTS } from '../mock-patients';
+import { PatientService } from '../patient.service';
 
 @Component({
   selector: 'app-patients',
@@ -8,16 +8,22 @@ import { PATIENTS } from '../mock-patients';
   styleUrls: ['./patients.component.css']
 })
 export class PatientsComponent implements OnInit {
-  patients = PATIENTS;
-
+  patients: Patient[];
   selectedPatient: Patient;
+
   onSelect(patient: Patient): void {
     this.selectedPatient = patient;
   }
 
-  constructor() { }
+  constructor(private patientService: PatientService) { }
+
+  getPatients(): void {
+    this.patientService.getPatients()
+        .subscribe(patients => this.patients = patients);
+  }
 
   ngOnInit() {
+    this.getPatients();
   }
 
 }
