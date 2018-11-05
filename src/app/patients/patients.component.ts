@@ -9,21 +9,15 @@ import { PatientService } from '../patient.service';
 })
 export class PatientsComponent implements OnInit {
   patients: Patient[];
-  selectedPatient: Patient;
-
-  onSelect(patient: Patient): void {
-    this.selectedPatient = patient;
-  }
 
   constructor(private patientService: PatientService) { }
-
-  getPatients(): void {
-    this.patientService.getPatients()
-        .subscribe(patients => this.patients = patients);
-  }
 
   ngOnInit() {
     this.getPatients();
   }
 
+  getPatients(): void {
+    this.patientService.getPatients()
+        .subscribe(patients => this.patients = patients);
+  }
 }

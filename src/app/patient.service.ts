@@ -16,4 +16,10 @@ export class PatientService {
     this.messageService.add('PatientService: fetched patients');
     return of(PATIENTS);
   }
+
+  getPatient(id: number): Observable<Patient> {
+    // TODO: send message _after_ fetching the patient
+    this.messageService.add(`PatientService: fetched patient id=${id}`);
+    return of (PATIENTS.find(patient => patient.id === id));
+  }
 }
