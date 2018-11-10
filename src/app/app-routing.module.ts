@@ -7,7 +7,7 @@ import { PatientDetailComponent } from './patient-detail/patient-detail.componen
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: PatientsComponent },
+  { path: 'detail/:id', component: PatientDetailComponent },
   { path: 'patients', component: PatientsComponent }
 ];
 

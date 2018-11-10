@@ -1,14 +1,16 @@
-<button (click)="goBack()">go back</button>
 <div *ngIf="patient">
 
   <h2>{{patient.firstName}} {{patient.lastName}} Details</h2>
   <div><span>id: </span>{{patient.id}}</div>
-  <div><span>sex: </span>{{patient.sex}}</div>
-  <div><span>dob: </span>{{patient.dob}}</div>
+  <!-- <div><span>sex: </span>{{patient.sex}}</div>
+  <div><span>dob: </span>{{patient.dob}}</div> -->
+
   <div>
     <label>Diagnoses:
-      <input [(ngModel)]="patient.diagnoses" placeholder="none">
+      <input [(ngModel)]="patient.diagnoses" placeholder="none"/>
     </label>
   </div>
-  
+
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { Patient } from '../patient';
 import { PatientService } from '../patient.service';
 
@@ -10,7 +11,8 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./patient-detail.component.css']
 })
 export class PatientDetailComponent implements OnInit {
-  @Input() patient: Patient;
+  patient: Patient;
+
   constructor(
     private route: ActivatedRoute,
     private patientService: PatientService,
@@ -23,10 +25,16 @@ export class PatientDetailComponent implements OnInit {
 
   getPatient(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.patientService.getPatient(id).subscribe(patient => this.patient = patient);
+    this.patientService.getPatient(id)
+      .subscribe(patient => this.patient = patient);
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.patientService.updatePatient(this.patient)
+      .subscribe(() => this.goBack());
   }
 }
