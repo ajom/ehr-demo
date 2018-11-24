@@ -36,14 +36,22 @@ export class PatientService {
   getPatient (id: number): Observable<Patient> {
     const url = `${this.patientsUrl}/${id}`;
     return this.http.get<Patient>(url).pipe(
-      tap(_ => this.log(`fetched patient id=${id}`))
+      tap(_ => this.log(`fetched patient id=${id}`)),
+      catchError(this.handleError<Patient>(`getPatient id=${id}`))
     );
   }
 
   updatePatient (patient: Patient): Observable<any> {
     return this.http.put(this.patientsUrl, patient, httpOptions).pipe(
       tap(_ => this.log(`updated patient id=${patient.id}`)),
-      catchError(this.handleError<any>('updatedPatient'))
+      catchError(this.handleError<any>('updatePatient'))
+    );
+  }
+
+  addPatient (patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>(this.patientsUrl, patient, httpOptions).pipe(
+      tap(/*(patient: Patient)*/ _ => this.log(`added patient id=${patient.id}`)),
+      catchError(this.handleError<Patient>('addPatient'))
     );
   }
 
