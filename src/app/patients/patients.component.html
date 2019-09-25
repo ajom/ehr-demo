@@ -1,7 +1,7 @@
 <h2>Patient List</h2>
 
-<div style="margin-left: 8%">
-  <h3>Add Patient</h3>  <!--TODO: turn this into a button that opens a larger add patient div-->
+<div>
+  <h3>Add Patient</h3>  <!-- TODO: turn this into a button that opens a larger add patient div -->
   <div class="row">
     <label>First name:
       <input #patientFirstName />
@@ -23,7 +23,8 @@
     <input #patientPhone />
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(patientFirstName.value, patientLastName.value, patientDob.value, patientSex.value, patientAddress.value, patientPhone.value); patientFirstName.value=''; patientLastName.value=''; patientDob.value=''; patientSex.value=''; patientAddress.value=''; patientPhone.value=''">
+  <button (click)="addPatient(patientFirstName.value, patientLastName.value, patientDob.value, patientSex.value, patientAddress.value, patientPhone.value);
+                              patientFirstName.value=''; patientLastName.value=''; patientDob.value=''; patientSex.value=''; patientAddress.value=''; patientPhone.value=''">
     add
   </button>
 </div>
@@ -31,8 +32,9 @@
 <ul class="patients">
   <li *ngFor="let patient of patients">
     <a routerLink="/detail/{{patient.id}}">
-      <span class="badge">{{patient.id}}</span>
-      {{patient.firstName}} {{patient.lastName}}
+      <span class="badge">{{patient.id}}</span> {{patient.firstName}} {{patient.lastName}}
     </a>
+    <button class="delete" title="delete patient"
+            (click)="deletePatient(paitent)">x</button>
   </li>
 </ul>

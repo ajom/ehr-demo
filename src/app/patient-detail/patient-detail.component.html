@@ -1,12 +1,13 @@
 <div *ngIf="patient">
-
   <h2>{{patient.firstName}} {{patient.lastName}} Details</h2>
   <div><span>id: </span>{{patient.id}}</div>
   <div><span>sex: </span>{{patient.sex}}</div>
   <div><span>dob: </span>{{patient.dob}}</div>
   <div><span>address: </span>{{patient.address}}</div>
   <div><span>phone: </span>{{patient.phone}}</div>
-  <div><span>last accessed: </span>{{patient.accessed}}</div>
+  <div><span>last accessed: </span>{{patient.lastAccessedDate}}</div>
+  <div><span>last updated: </span>{{patient.lastUpdatedDate}}</div>
+  <div><span>created: </span>{{patient.createDate}}</div>
 
   <div>
     <label>Diagnoses:

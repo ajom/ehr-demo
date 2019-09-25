@@ -11,7 +11,7 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./patient-detail.component.css']
 })
 export class PatientDetailComponent implements OnInit {
-  patient: Patient;
+  @Input() patient: Patient;
 
   constructor(
     private route: ActivatedRoute,

@@ -5,24 +5,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Patient } from './patient';
 import { MessageService } from './message.service';
 
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
     providedIn: 'root'
 })
 export class PatientService {
-    private patientsUrl = 'http://localhost:3000/api/v1/patients'; // URL to web api
+
+    private patientsUrl = 'http://localhost:3000/api/patients'; // URL to web api
+
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
     constructor(
         private http: HttpClient,
         private messageService: MessageService
     ) { }
-
-    private log (message: string) {
-        this.messageService.add(`PatientService: ${message}`);
-    }
 
     getPatients (): Observable<Patient[]> {
         return this.http.get<Patient[]>(this.patientsUrl)
@@ -41,17 +39,27 @@ export class PatientService {
         );
     }
 
+    addPatient (patient: Patient): Observable<Patient> {
+        return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
+            tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.id}`)),
+            catchError(this.handleError<Patient>('addPatient'))
+        );
+    }
+
     updatePatient (patient: Patient): Observable<any> {
-        return this.http.put(this.patientsUrl, patient, httpOptions).pipe(
-            tap(_ => this.log(`updated patient id=${patient.patientId}`)),
+        return this.http.put(`${this.patientsUrl}/add`, patient, this.httpOptions).pipe(
+            tap(_ => this.log(`updated patient id=${patient.id}`)),
             catchError(this.handleError<any>('updatePatient'))
         );
     }
 
-    addPatient (patient: Patient): Observable<Patient> {
-        return this.http.post<Patient>(this.patientsUrl, patient, httpOptions).pipe(
-            tap(/*(patient: Patient)*/ _ => this.log(`added patient id=${patient.patientId}`)),
-            catchError(this.handleError<Patient>('addPatient'))
+    deletePatient (patient: Patient | number): Observable<Patient> {
+        const id = typeof patient === 'number' ? patient : patient.id;
+        const url = `${this.patientsUrl}/${id}`;
+
+        return this.http.delete<Patient>(url, this.httpOptions).pipe(
+            tap(_ => this.log(`deleted patient id=${id}`)),
+            catchError(this.handleError<Patient>('deletePatient'))
         );
     }
 
@@ -73,5 +81,9 @@ export class PatientService {
             // Let the app keep running by returning an empty result.
             return of(result as T);
         };
+    }
+
+    private log (message: string) {
+        this.messageService.add(`PatientService: ${message}`);
     }
 }
