@@ -24,14 +24,14 @@
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="addPatient(patientFirstName.value, patientLastName.value, patientDob.value, patientSex.value, patientAddress.value, patientPhone.value);
-                              patientFirstName.value=''; patientLastName.value=''; patientDob.value=''; patientSex.value=''; patientAddress.value=''; patientPhone.value=''">
+                   patientFirstName.value=''; patientLastName.value=''; patientDob.value=''; patientSex.value=''; patientAddress.value=''; patientPhone.value=''">
     add
   </button>
 </div>
 
 <ul class="patients">
   <li *ngFor="let patient of patients">
-    <a routerLink="/detail/{{patient.id}}">
+    <a routerLink="/patients/{{patient.id}}">
       <span class="badge">{{patient.id}}</span> {{patient.firstName}} {{patient.lastName}}
     </a>
     <button class="delete" title="delete patient"

@@ -24,6 +24,7 @@
     "angular-in-memory-web-api": "^0.7.0",
     "core-js": "^2.6.9",
     "rxjs": "~6.2.0",
+    "turbocommons-ts": "^3.0.1",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {

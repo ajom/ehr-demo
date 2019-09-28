@@ -1,4 +1,4 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+/*import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Patient } from './patient';
 import { Injectable } from '@angular/core';
 
@@ -9,7 +9,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const patients = [
       { id: 11,
-        firstName: 'Joe',
+        firstName: 'WRONG',
         lastName: 'Schmoe',
         dob: 'July 25, 1985',
         sex: 'M',
@@ -18,7 +18,7 @@ export class InMemoryDataService implements InMemoryDbService {
         accessed: 'Today',
         diagnoses: '' },
       { id: 12,
-        firstName: 'Jolene',
+        firstName: 'WRONG',
         lastName: 'Patient',
         dob: 'July 25, 1985',
         sex: 'F',
@@ -27,7 +27,7 @@ export class InMemoryDataService implements InMemoryDbService {
         accessed: 'Today',
         diagnoses: '' },
       { id: 13,
-        firstName: 'Jim',
+        firstName: 'WRONG',
         lastName: 'Patient',
         dob: 'July 25, 1985',
         sex: 'M',
@@ -48,3 +48,4 @@ export class InMemoryDataService implements InMemoryDbService {
     return patients.length > 0 ? Math.max(...patients.map(hero => hero.id)) + 1 : 11;
   }
 }
+*/
