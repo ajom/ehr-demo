@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../patient';
 import { PatientService } from '../patient.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
     selector: 'app-patients',
@@ -8,7 +9,9 @@ import { PatientService } from '../patient.service';
     styleUrls: ['./patients.component.css']
 })
 export class PatientsComponent implements OnInit {
-    patients: Patient[];
+
+    private patients = new BehaviorSubject<Patient[]>(null);
+    public patients$ = this.patients.asObservable();
 
     constructor(private patientService: PatientService) { }
 
@@ -17,8 +20,9 @@ export class PatientsComponent implements OnInit {
     }
 
     getPatients (): void {
+        // this.patients$ = this.patientService.getPatients();
         this.patientService.getPatients()
-            .subscribe(patients => this.patients = patients);
+            .subscribe(patients => this.patients.next(patients));
     }
 
     addPatient (firstName: string, lastName: string, dob: string, sex: string, address: string, phone: string): void {
@@ -31,20 +35,18 @@ export class PatientsComponent implements OnInit {
 
         if (!firstName || !lastName) { return; }
         this.patientService.addPatient({
-            firstName,
-            lastName,
+            first_name: firstName,
+            last_name: lastName,
             dob,
             sex,
             address,
             phone,
         } as Patient)
-            .subscribe(patient => {
-                this.patients.push(patient);
-            });
+            .subscribe(() => this.getPatients());
     }
 
     deletePatient (patient: Patient): void {
-        this.patients = this.patients.filter(p => p !== patient);
-        this.patientService.deletePatient(patient).subscribe();
+        this.patientService.deletePatient(patient)
+            .subscribe(() => this.getPatients());
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Patient } from './patient';
@@ -41,20 +41,20 @@ export class PatientService {
 
     addPatient (patient: Patient): Observable<Patient> {
         return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
-            tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.id}`)),
+            tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.patient_id}`)),
             catchError(this.handleError<Patient>('addPatient'))
         );
     }
 
     updatePatient (patient: Patient): Observable<any> {
         return this.http.put(`${this.patientsUrl}/add`, patient, this.httpOptions).pipe(
-            tap(_ => this.log(`updated patient id=${patient.id}`)),
+            tap(_ => this.log(`updated patient id=${patient.patient_id}`)),
             catchError(this.handleError<any>('updatePatient'))
         );
     }
 
     deletePatient (patient: Patient | number): Observable<Patient> {
-        const id = typeof patient === 'number' ? patient : patient.id;
+        const id = typeof patient === 'number' ? patient : patient.patient_id;
         const url = `${this.patientsUrl}/${id}`;
 
         return this.http.delete<Patient>(url, this.httpOptions).pipe(

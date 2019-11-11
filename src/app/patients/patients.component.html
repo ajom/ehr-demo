@@ -30,9 +30,9 @@
 </div>
 
 <ul class="patients">
-  <li *ngFor="let patient of patients">
-    <a routerLink="/patients/{{patient.id}}">
-      <span class="badge">{{patient.id}}</span> {{patient.firstName}} {{patient.lastName}}
+  <li *ngFor="let patient of patients$ | async">
+    <a routerLink="/patients/{{patient.patient_id}}">
+      <span class="badge">{{patient.patient_id}}</span> {{patient.first_name}} {{patient.last_name}}
     </a>
     <button class="delete" title="delete patient"
             (click)="deletePatient(paitent)">x</button>
