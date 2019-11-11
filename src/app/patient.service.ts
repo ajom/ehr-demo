@@ -22,7 +22,7 @@ export class PatientService {
         private messageService: MessageService
     ) { }
 
-    getPatients (): Observable<Patient[]> {
+    getPatients(): Observable<Patient[]> {
         return this.http.get<Patient[]>(this.patientsUrl)
             .pipe(
                 tap(_ => this.log('fetched patients')),
@@ -31,7 +31,7 @@ export class PatientService {
     }
 
     /** Get patient by id. Will 404 if id not found */
-    getPatient (id: number): Observable<Patient> {
+    getPatient(id: number): Observable<Patient> {
         const url = `${this.patientsUrl}/${id}`;
         return this.http.get<Patient>(url).pipe(
             tap(_ => this.log(`fetched patient id=${id}`)),
@@ -39,21 +39,21 @@ export class PatientService {
         );
     }
 
-    addPatient (patient: Patient): Observable<Patient> {
+    addPatient(patient: Patient): Observable<Patient> {
         return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
             tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.patient_id}`)),
             catchError(this.handleError<Patient>('addPatient'))
         );
     }
 
-    updatePatient (patient: Patient): Observable<any> {
+    updatePatient(patient: Patient): Observable<any> {
         return this.http.put(`${this.patientsUrl}/add`, patient, this.httpOptions).pipe(
             tap(_ => this.log(`updated patient id=${patient.patient_id}`)),
             catchError(this.handleError<any>('updatePatient'))
         );
     }
 
-    deletePatient (patient: Patient | number): Observable<Patient> {
+    deletePatient(patient: Patient | number): Observable<Patient> {
         const id = typeof patient === 'number' ? patient : patient.patient_id;
         const url = `${this.patientsUrl}/${id}`;
 
@@ -69,7 +69,7 @@ export class PatientService {
      * @param operation - name of the operation that failed
      * @param result - optional value to return as the observable result
      */
-    private handleError<T> (operation = 'operation', result?: T) {
+    private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
@@ -83,7 +83,7 @@ export class PatientService {
         };
     }
 
-    private log (message: string) {
+    private log(message: string) {
         this.messageService.add(`PatientService: ${message}`);
     }
 }

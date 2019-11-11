@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Patient } from '../patient';
 import { PatientService } from '../patient.service';
 import { BehaviorSubject } from 'rxjs';
+import {log} from 'util';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
     getPatientsSnapshot(): void {
         this.patientService.getPatients()
-            .subscribe(patients => this.patients.next(patients) // patients.slice(1, 3)
+            .subscribe(patients => this.patients.next(patients.slice(0, 3))
         );
     }
 }

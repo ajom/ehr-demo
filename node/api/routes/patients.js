@@ -6,10 +6,12 @@ app.get('/', function(req, res) {
     res.locals.connection.query('SELECT * from patients', function (error, results) {
         if (error) {
             // If there is error, we send the error in the error section with 500 status
-            res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+            // res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+            res.status(500).error(error);
         } else {
             // If there is no error, all is good and response is 200OK.
-            res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+            // res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+            res.status(200).send(results);
         }
     });
 });
@@ -17,9 +19,9 @@ app.get('/', function(req, res) {
 app.get('/:id', function(req, res) {
     res.locals.connection.query(`SELECT * from patients WHERE patient_id = ${req.params.id}`, function (error, results) {
         if (error) {
-            res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+            res.status(500).error(error);
         } else {
-            res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+            res.status(200).send(results);
         }
     });
 });
@@ -31,9 +33,9 @@ app.post('/add', function(req, res) {
         function(error, results) {
         // TODO: Use spread operator here to populate values. Then, select the new record's id.
             if (error) {
-                res.send(JSON.stringify({"status": 500, "error": error, "response": null}))
+                res.status(500).error(error);
             } else {
-                res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+                res.status(200).send(results);
             }
         }
     );

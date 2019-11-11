@@ -12,6 +12,13 @@ export class Patient {
     last_updated_date: Date;
     create_date: Date;
 
+    constructor(obj: any = null) {
+        console.log(obj);
+        if (obj != null) {
+            Object.assign(this, obj);
+        }
+    }
+
      /*constructor(jsonString: string) {
          const jsonObj: any = JSON.parse(jsonString);
 
