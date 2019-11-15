@@ -40,7 +40,8 @@ export class PatientService {
     }
 
     addPatient(patient: Patient): Observable<Patient> {
-        return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
+        const url = `${this.patientsUrl}/add`;
+        return this.http.post<Patient>(url, patient, this.httpOptions).pipe(
             tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.patient_id}`)),
             catchError(this.handleError<Patient>('addPatient'))
         );

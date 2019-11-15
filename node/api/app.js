@@ -9,7 +9,7 @@ const usersRouter = require('./routes/users');
 const patientsRouter = require('./routes/patients');
 
 const app = express();
-const mysql = require("mysql");
+const mysql = require('mysql');
 
 
 //Database connection

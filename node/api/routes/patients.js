@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+const PatientModel = require('../models/model.patient');
 
 /* GET patients listing. */
 app.get('/', function(req, res) {
@@ -7,7 +8,7 @@ app.get('/', function(req, res) {
         if (error) {
             // If there is error, we send the error in the error section with 500 status
             // res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
-            res.status(500).error(error);
+            res.status(500).send(error);
         } else {
             // If there is no error, all is good and response is 200OK.
             // res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
@@ -19,7 +20,7 @@ app.get('/', function(req, res) {
 app.get('/:id', function(req, res) {
     res.locals.connection.query(`SELECT * from patients WHERE patient_id = ${req.params.id}`, function (error, results) {
         if (error) {
-            res.status(500).error(error);
+            res.status(500).send(error);
         } else {
             res.status(200).send(results);
         }
@@ -27,13 +28,13 @@ app.get('/:id', function(req, res) {
 });
 
 app.post('/add', function(req, res) {
-    let patient = req.body.patient;
-    res.local.connection.query(
-        `INSERT INTO patients(firstName, lastName, dob, sex, address, phone)VALUES(${patient.first_name}, ${patient.last_name}, ${patient.dob}, ${patient.sex}, ${patient.address}, ${patient.phone});SELECT LAST_INSERT_ID();`,
+    let patient = new PatientModel(req.body);
+    res.locals.connection.query(
+        `INSERT INTO patients(first_name, last_name, dob, sex, address, phone) VALUES('${patient.first_name}', '${patient.last_name}', ${patient.dob}, ${patient.sex}, ${patient.address}, ${patient.phone});`, // TODO: Add another function to return SELECT LAST_INSERT_ID();
         function(error, results) {
         // TODO: Use spread operator here to populate values. Then, select the new record's id.
             if (error) {
-                res.status(500).error(error);
+                res.status(500).send(error);
             } else {
                 res.status(200).send(results);
             }
