@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Patient } from './patient';
@@ -33,6 +33,7 @@ export class PatientService {
     /** Get patient by id. Will 404 if id not found */
     getPatient(id: number): Observable<Patient> {
         const url = `${this.patientsUrl}/${id}`;
+
         return this.http.get<Patient>(url).pipe(
             tap(_ => this.log(`fetched patient id=${id}`)),
             catchError(this.handleError<Patient>(`getPatient id=${id}`))
@@ -40,7 +41,8 @@ export class PatientService {
     }
 
     addPatient(patient: Patient): Observable<Patient> {
-        const url = `${this.patientsUrl}/add`;
+        const url = `${this.patientsUrl}/`;
+
         return this.http.post<Patient>(url, patient, this.httpOptions).pipe(
             tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.patient_id}`)),
             catchError(this.handleError<Patient>('addPatient'))
@@ -48,7 +50,7 @@ export class PatientService {
     }
 
     updatePatient(patient: Patient): Observable<any> {
-        return this.http.put(`${this.patientsUrl}/add`, patient, this.httpOptions).pipe(
+        return this.http.put(`${this.patientsUrl}/`, patient, this.httpOptions).pipe(
             tap(_ => this.log(`updated patient id=${patient.patient_id}`)),
             catchError(this.handleError<any>('updatePatient'))
         );

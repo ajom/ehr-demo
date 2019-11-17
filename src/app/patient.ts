@@ -1,4 +1,5 @@
-import { StringUtils } from 'turbocommons-ts';
+// import { StringUtils } from 'turbocommons-ts';
+import {DatePipe} from '@angular/common';
 
 export class Patient {
     patient_id: number;
@@ -12,11 +13,19 @@ export class Patient {
     last_updated_date: Date;
     create_date: Date;
 
-    constructor(obj: any = null) {
-        console.log(obj);
-        if (obj != null) {
-            Object.assign(this, obj);
-        }
+    constructor(obj: any = null, private datePipe: DatePipe) {
+        this.patient_id = obj.patient_id;
+        this.first_name = obj.first_name;
+        this.last_name = obj.last_name;
+        this.dob = obj.dob;
+        this.sex = obj.sex;
+        this.address = obj.address;
+        this.phone = obj.phone;
+        this.last_accessed_date = obj.last_accessed_date;
+        this.last_updated_date = obj.last_updated_date;
+        this.create_date = obj.create_date;
+
+        Object.keys(this).forEach(key => typeof key === Date ? datePipe.transform(this[key], 'MM/dd/yyyy'));
     }
 
      /*constructor(jsonString: string) {

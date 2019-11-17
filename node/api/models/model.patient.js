@@ -1,19 +1,4 @@
-class PatientModel
-{
-    // constructor(patient_id, first_name, last_name, dob, sex, address, phone, last_accessed_date, last_updated_date, create_date)
-    // {
-    //     this.patient_id = patient_id;
-    //     this.first_name = first_name;
-    //     this.last_name = last_name;
-    //     this.dob = dob;
-    //     this.sex = sex;
-    //     this.address = address;
-    //     this.phone = phone;
-    //     this.last_accessed_date = last_accessed_date;
-    //     this.last_updated_date = last_updated_date;
-    //     this.create_date = create_date;
-    // }
-
+class PatientDTO {
     constructor(obj) {
         Object.keys(obj).map(function(key, index) {
             if (obj[key] === null || obj[key] === '') {
@@ -21,8 +6,19 @@ class PatientModel
             }
         });
 
-        obj && Object.assign(this, obj);
+        this.patient_id = obj.patient_id;
+        this.first_name = obj.first_name;
+        this.last_name = obj.last_name;
+        this.dob = obj.dob;
+        this.sex = obj.sex;
+        this.address = obj.address;
+        this.phone = obj.phone;
+        this.last_accessed_date = obj.last_accessed_date;
+        this.last_updated_date = obj.last_updated_date;
+        this.create_date = obj.create_date;
+
+        // obj && Object.assign(this, obj);
     }
 }
 
-module.exports = PatientModel;
+module.exports = PatientDTO;
