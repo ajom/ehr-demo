@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PatientsComponent } from './patients/patients.component';
@@ -12,7 +11,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientEditModalComponent } from './patient-edit-modal/patient-edit-modal.component';
-// import { InMemoryDataService } from './in-memory-data.service';
+import { InlineEditComponent } from './editable/inline-edit.component';
 
 @NgModule({
   imports: [
@@ -23,9 +22,6 @@ import { PatientEditModalComponent } from './patient-edit-modal/patient-edit-mod
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    /* HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )*/
   ],
   declarations: [
     AppComponent,
@@ -33,7 +29,8 @@ import { PatientEditModalComponent } from './patient-edit-modal/patient-edit-mod
     PatientsComponent,
     PatientDetailComponent,
     MessagesComponent,
-    PatientEditModalComponent
+    PatientEditModalComponent,
+    InlineEditComponent
   ],
   entryComponents: [PatientEditModalComponent],
   providers: [],

@@ -9,12 +9,6 @@
   <div><span>last updated: </span>{{patient.last_updated_date | date}}</div>
   <div><span>created: </span>{{patient.create_date | date}}</div>
 
-  <!--<div>
-    <label>Diagnoses:
-      <input [(ngModel)]="patient.diagnoses" placeholder="none"/>
-    </label>
-  </div>-->
-
   <button (click)="goBack()">go back</button>
-  <button (click)="edit()">edit</button>
+  <button (click)="openEditModal()">edit</button>
 </div>

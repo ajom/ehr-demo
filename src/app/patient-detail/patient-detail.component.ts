@@ -36,7 +36,7 @@ export class PatientDetailComponent implements OnInit {
         this.location.back();
     }
 
-    edit(): void {
+    openEditModal(): void {
         const modalRef = this.modalService.open(PatientEditModalComponent, { size: 'lg' });
         modalRef.componentInstance.patientId = this.patient.patient_id;
 

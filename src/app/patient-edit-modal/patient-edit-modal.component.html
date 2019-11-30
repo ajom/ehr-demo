@@ -8,17 +8,20 @@
 <div class="modal-body">
     <form [formGroup]="patientForm" (ngSubmit)="submitForm()">
         <div class="container">
-            <div class="form-group">
-                <label for="first_name">First name</label>
-                <input type="text" class="form-control" formControlName="first_name">
-    <!--            <label for="dateOfBirth">Date of birth</label>-->
-    <!--            <div class="input-group">-->
-    <!--                <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">-->
-    <!--                <div class="input-group-append">-->
-    <!--                    <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>-->
-    <!--                </div>-->
-    <!--            </div>-->
-            </div>
+            <form [formGroup]="patientForm" (ngSubmit)="submitForm()">
+                <div class="form-group">
+                    <label for="first_name">First Name
+                        <input type="text"
+                               class="form-control"
+                               formControlName="first_name" />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name
+                        <input type="password" class="form-control">
+                    </label>
+                </div>
+            </form>
         </div>
     </form>
 </div>

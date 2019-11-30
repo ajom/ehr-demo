@@ -1,11 +1,10 @@
-import {Component, ViewEncapsulation, Input} from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-patient-edit-modal',
     templateUrl: './patient-edit-modal.component.html',
-    encapsulation: ViewEncapsulation.None,
     styleUrls: ['./patient-edit-modal.component.css']
 })
 export class PatientEditModalComponent {
