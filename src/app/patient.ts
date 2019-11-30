@@ -25,7 +25,7 @@ export class Patient {
         this.last_updated_date = obj.last_updated_date;
         this.create_date = obj.create_date;
 
-        Object.keys(this).forEach(key => typeof key === Date ? datePipe.transform(this[key], 'MM/dd/yyyy'));
+        // Object.keys(this).forEach(key => typeof key === typeof Date ? datePipe.transform(this[key], 'MM/dd/yyyy') : null);
     }
 
      /*constructor(jsonString: string) {

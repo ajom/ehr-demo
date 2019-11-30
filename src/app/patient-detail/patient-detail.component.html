@@ -2,12 +2,12 @@
   <h2>{{patient.first_name}} {{patient.last_name}} Details</h2>
   <div><span>id: </span>{{patient.patient_id}}</div>
   <div><span>sex: </span>{{patient.sex}}</div>
-  <div><span>dob: </span>{{patient.dob}}</div>
+  <div><span>dob: </span>{{patient.dob | date}}</div>
   <div><span>address: </span>{{patient.address}}</div>
   <div><span>phone: </span>{{patient.phone}}</div>
-  <div><span>last accessed: </span>{{patient.last_accessed_date}}</div>
-  <div><span>last updated: </span>{{patient.last_updated_date}}</div>
-  <div><span>created: </span>{{patient.create_date}}</div>
+  <div><span>last accessed: </span>{{patient.last_accessed_date | date}}</div>
+  <div><span>last updated: </span>{{patient.last_updated_date | date}}</div>
+  <div><span>created: </span>{{patient.create_date | date}}</div>
 
   <!--<div>
     <label>Diagnoses:
@@ -16,5 +16,5 @@
   </div>-->
 
   <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+  <button (click)="edit()">edit</button>
 </div>

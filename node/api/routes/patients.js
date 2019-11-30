@@ -35,7 +35,7 @@ app.post('/', function(req, res) {
     let patient = new PatientDTO(req.body);
     res.locals.connection.query(
         'INSERT INTO patients(first_name, last_name, dob, sex, address, phone) VALUES(?, ?, ?, ?, ?, ?)',
-        [patient.last_name, patient.last_name, patient.dob, patient.sex, patient.address, patient.phone],
+        [patient.first_name, patient.last_name, patient.dob, patient.sex, patient.address, patient.phone],
         // TODO: Add another function to return SELECT LAST_INSERT_ID();
 
         function(error, results) { // TODO: Use spread operator here to populate values. Then, select the new record's id.
